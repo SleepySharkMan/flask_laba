@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Крутой сайт</title>
+</head>
+
+<body>
+  <div class="container">
+    {% block base %} {% endblock %}
+
+    {% block signup %} {% endblock %}
+
+    {% block signin %} {% endblock %}
+
+    {% block cab %} {% endblock %}
+
+    {% block users %} {% endblock %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+              <p class="msg"> {{ message }} </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+  </div>
+</body>
+
+</html>

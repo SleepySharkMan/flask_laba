@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+{% block cab %}
+
+<div class="container">
+
+  <h1>Пользователь: {{ user.name }}</h1>
+  <p>Количесвто подпсчиков (followers): {{ user.count_followers() }}</p>
+  <p>Количесвто подписок (following): {{ user.count_followed() }}</p>
+
+  <div>
+    <a href="{{ url_for('users') }}">
+      <input type="button" value="Другие пользователи">
+    </a>
+    {% if is_auth %}
+    <a href="{{ url_for('logout') }}">
+      <input type="button" value="Выйти из аккаунта">
+    </a>
+    <form action="{{ url_for('publish_post') }}" method="post">
+      <textarea id="user_post" name="post_content" rows="5" cols="33" ></textarea>
+      <input type="submit" value="Опубликовать">
+    </form>
+    {% else %}
+    <a href="{{ url_for('owncabinet', login='') }}">
+      <input type="button" value="Домой">
+    </a>
+    {% if is_followed %}
+    <a href="{{ url_for('unfollow', login=user.login) }}">
+      <input type="button" value="Отписаться">
+    </a>
+    {% else %}
+    <a href="{{ url_for('follow', login=user.login) }}">
+      <input type="button" value="Подписаться">
+    </a>
+    {% endif %}
+    {% endif %}
+  </div>
+
+  <hr>
+  {% for post in user.followed_posts() %}
+  <p>
+    {{ post[1] }} говорит: <b>{{ post[2] }}</b>
+  </p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

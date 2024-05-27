@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block users %}
+
+<div class="container">
+
+    <a href="{{ url_for('owncabinet', login='') }}">
+        <input type="button" value="Домой">
+    </a>
+    {% for user_login in users_logins %}
+    <a href="{{ url_for('cabinet', login=user_login) }}">{{ user_login }}</a>
+    <hr>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

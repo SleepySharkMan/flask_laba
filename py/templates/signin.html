@@ -1,0 +1,30 @@
+{% extends "index.html" %} 
+{% block signin %} 
+
+  <div class="container">
+    <h2>Вход</h2>
+    <form action="" method="post" novalidate> {{ form.hidden_tag() }} 
+        <div class="input-field">
+        {{ form.login(size=32) }}
+        </div>
+        <div class="input-field">
+            {{ form.password(size=32) }}
+        </div>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p> 
+        <a>{{ form.submit() }}</a>  
+        </form> 
+      <a href="index">
+        <input type="button" value="На главную">
+      </a>
+
+
+    {% for field, errors in form.errors.items() %}
+      {% for error in errors %}
+        <p class="msg">{{ error }}</p>
+      {% endfor %}
+    {% endfor %}
+
+    </form>
+  </div>
+ 
+{% endblock %}
